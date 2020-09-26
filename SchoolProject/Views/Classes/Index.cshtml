@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SchoolProject.Models.ClassModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>List of classes</h2>
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="/classes/show/@item.Id">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>

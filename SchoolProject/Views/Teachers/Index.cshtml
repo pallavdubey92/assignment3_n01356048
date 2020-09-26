@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SchoolProject.Models.Teacher>
+
+@{
+    ViewBag.Title = "List of Teachers";
+}
+
+<h2>List of Teachers</h2>
+
+<p>Filters</p>
+<form action="/teachers" method="post">
+    <input type="text" name="nameSearchKey" placeholder="search by name" required />
+    <button type="submit">GO</button>
+</form>
+<form action="/teachers" method="post">
+    <input type="number" name="minSalary" placeholder="minimum salary" required />
+    <input type="number" name="maxSalary" placeholder="maximum salary" required />
+    <button type="submit">GO</button>
+</form>
+<form action="/teachers" method="post">
+    <button type="submit">Reset Filter</button>
+</form>
+
+<ul>
+    @foreach (var teacher in Model)
+    {
+        <li>
+            <a href="/teachers/show/@teacher.Id">@teacher.Name</a>
+        </li>
+    }
+</ul>

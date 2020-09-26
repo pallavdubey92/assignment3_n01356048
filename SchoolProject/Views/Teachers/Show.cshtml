@@ -1,0 +1,22 @@
+﻿@model SchoolProject.Models.ShowTeacherModel
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>@Model.Teacher.Name</h2>
+<p>Employee Number: @Model.Teacher.EmployeeNumber</p>
+<p>Hire date: @Model.Teacher.HireDate.ToString("dd MMM yyyy")</p>
+<p>Salary: @Model.Teacher.Salary</p>
+<p>Classes: </p>
+<ul>
+    @foreach (var item in Model.Classes)
+    {
+        <li>
+            <a href="/classes/show/@item.Id">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>
+
