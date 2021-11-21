@@ -17,6 +17,8 @@ namespace SchoolProject.Controllers
         /// <param name="nameSearchKey">key to filter list by name</param>
         /// <param name="minSalary">to filter list by min salary (requires both min and max value)</param>
         /// <param name="maxSalary">to filter list by max salary (requires both min and max value)</param>
+        /// <param name="startDate">to filter list by hire date, start date for the range</param>
+        /// <param name="endDate">to filter list by hire date, end date for the range</param>
         /// <returns>
         /// <ArrayOfTeacher>
         ///     <Teacher>
@@ -40,7 +42,9 @@ namespace SchoolProject.Controllers
         public List<Teacher> GetAll(
             string nameSearchKey = null,
             decimal minSalary = 0,
-            decimal maxSalary = 0)
+            decimal maxSalary = 0,
+            DateTime? startDate = null,
+            DateTime? endDate = null)
         {
             var teachers = new List<Teacher>();
 
@@ -64,6 +68,14 @@ namespace SchoolProject.Controllers
                 query += " WHERE t.salary >= @min AND t.salary <= @max";
                 cmd.Parameters.AddWithValue("@min", minSalary);
                 cmd.Parameters.AddWithValue("@max", maxSalary);
+            }
+
+            // add where clause for hiring date if date values are not null
+            if (startDate != null && endDate != null)
+            {
+                query += " WHERE t.hiredate >= @start AND t.hiredate<= @end";
+                cmd.Parameters.AddWithValue("@start", startDate);
+                cmd.Parameters.AddWithValue("@end", endDate);
             }
 
             cmd.CommandText = query;

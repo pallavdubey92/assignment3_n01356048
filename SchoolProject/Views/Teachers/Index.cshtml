@@ -8,12 +8,26 @@
 
 <p>Filters</p>
 <form action="/teachers" method="post">
+    <div>
+        <label>Filter by name</label>
+    </div>
     <input type="text" name="nameSearchKey" placeholder="search by name" required />
     <button type="submit">GO</button>
 </form>
 <form action="/teachers" method="post">
+    <div>
+        <label>Filter by salary</label>
+    </div>
     <input type="number" name="minSalary" placeholder="minimum salary" required />
     <input type="number" name="maxSalary" placeholder="maximum salary" required />
+    <button type="submit">GO</button>
+</form>
+<form action="/teachers" method="post">
+    <div>
+        <label>Filter By hiring date</label>
+    </div>
+    <input type="date" name="startDate" placeholder="start date" required />
+    <input type="date" name="endDate" placeholder="end date" required />
     <button type="submit">GO</button>
 </form>
 <form action="/teachers" method="post">
