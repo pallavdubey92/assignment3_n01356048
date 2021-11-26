@@ -96,6 +96,7 @@ namespace SchoolProject.Controllers
                 teachers.Add(teacher);
             }
 
+            conn.Close();
             return teachers;
         }
 
@@ -181,6 +182,7 @@ namespace SchoolProject.Controllers
                 teacher.Salary = (decimal)result["salary"];
             }
 
+            conn.Close();
             return teacher;
         }
 
@@ -233,6 +235,7 @@ namespace SchoolProject.Controllers
                 classes.Add(classModel);
             }
 
+            conn.Close();
             return classes;
         }
     }

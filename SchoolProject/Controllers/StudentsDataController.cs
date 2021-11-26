@@ -57,6 +57,7 @@ namespace SchoolProject.Controllers
                 students.Add(student);
             }
 
+            conn.Close();
             return students;
         }
 
@@ -94,6 +95,7 @@ namespace SchoolProject.Controllers
                 student.EnrolDate = (DateTime)result["enroldate"];
             }
 
+            conn.Close();
             return student;
         }
     }

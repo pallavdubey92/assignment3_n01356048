@@ -63,6 +63,7 @@ namespace SchoolProject.Controllers
                 classes.Add(classModel);
             }
 
+            conn.Close();
             return classes;
         }
 
@@ -104,6 +105,7 @@ namespace SchoolProject.Controllers
                 classModel.FinishDate = (DateTime)result["finishdate"];
             }
 
+            conn.Close();
             return classModel;
         }
     }
