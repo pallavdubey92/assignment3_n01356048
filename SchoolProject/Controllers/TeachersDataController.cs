@@ -238,5 +238,80 @@ namespace SchoolProject.Controllers
             conn.Close();
             return classes;
         }
+
+        /// <summary>
+        /// method to add new teacher to the DB
+        /// </summary>
+        /// <param name="newTeacher">details of new teacher</param>
+        [HttpPost]
+        [Route("")]
+        public bool Add(AddTeacherModel newTeacher)
+        {
+            var isValid = newTeacher.Validate();
+
+            if (isValid == false)
+            {
+                return false;
+            }
+
+            var sql = @"INSERT INTO school.teachers
+                        (teacherfname, teacherlname, employeenumber, hiredate, salary)
+                        VALUES(@fName, @lName, @empNo, @hireDate, @salary)";
+
+            var conn = dbContext.AccessDatabase();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = sql;
+            cmd.Prepare();
+
+            cmd.Parameters.AddWithValue("@fName", newTeacher.FName);
+            cmd.Parameters.AddWithValue("@lName", newTeacher.LName);
+            cmd.Parameters.AddWithValue("@empNo", newTeacher.EmpNo);
+            cmd.Parameters.AddWithValue("@hireDate", newTeacher.HireDate);
+            cmd.Parameters.AddWithValue("@salary", newTeacher.Salary);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+
+            return true;
+        }
+
+        /// <summary>
+        /// deletes a teacher from the database
+        /// </summary>
+        /// <param name="id">int id of the teacher to delete</param>
+        /// <returns>
+        /// true, if delete is successful
+        /// flase, if teacher has associated classes and cannot be deleted
+        /// </returns>
+        [HttpDelete]
+        [Route("{id}")]
+        public bool Delete(int id)
+        {
+            var classes = GetClassByTeacherId(id);
+
+            if (classes.Count > 0)
+            {
+                return false;
+            }
+
+            var sql = @"DELETE FROM school.teachers
+                        WHERE teacherid=@id;";
+
+            var conn = dbContext.AccessDatabase();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = sql;
+            cmd.Prepare();
+
+            cmd.Parameters.AddWithValue("@id", id);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            return true;
+        }
     }
 }

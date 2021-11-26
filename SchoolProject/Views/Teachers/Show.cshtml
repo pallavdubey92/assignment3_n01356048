@@ -4,6 +4,11 @@
     ViewBag.Title = "Show";
 }
 
+@*https://stackoverflow.com/questions/24763493/how-to-include-js-files-in-the-view-asp-net-mvc-4*@
+@Scripts.Render("~/Scripts/Teacher/show-teacher.js")
+
+<a id="deleteLink" href="/teachers/delete/@Model.Teacher.Id">Delete</a>
+
 <h2>@Model.Teacher.Name</h2>
 <p>Employee Number: @Model.Teacher.EmployeeNumber</p>
 <p>Hire date: @Model.Teacher.HireDate.ToString("dd MMM yyyy")</p>

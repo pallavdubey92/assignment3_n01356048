@@ -15,3 +15,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.error-input {
+    background-color: red;
+}
+
+.err-msg {
+    color: red;
+}

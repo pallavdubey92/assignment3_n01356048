@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolProject.Models;
+using System;
 using System.Web.Mvc;
 
 namespace SchoolProject.Controllers
@@ -40,6 +41,44 @@ namespace SchoolProject.Controllers
         {
             var teacher = dataController.GetById(id);
             return View(teacher);
+        }
+
+        /// <summary>
+        /// GET: /teachers/add
+        /// </summary>
+        /// <returns>
+        /// returns view with form to add new teacher
+        /// </returns>
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// POST: /teachers/create
+        /// </summary>
+        /// <param name="newTeacher">details of new teacher</param>
+        /// <returns>
+        /// redirects to teacher list
+        /// </returns>
+        [HttpPost]
+        public ActionResult Create(AddTeacherModel newTeacher)
+        {
+            dataController.Add(newTeacher);
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// GET: /teachers/delete
+        /// </summary>
+        /// <param name="id">id of the teacher to delete</param>
+        /// <returns>redirects to teacher list</returns>
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            dataController.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }
