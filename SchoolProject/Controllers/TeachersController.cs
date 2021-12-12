@@ -70,6 +70,29 @@ namespace SchoolProject.Controllers
         }
 
         /// <summary>
+        /// GET: /teachers/update 
+        /// </summary>
+        /// <param name="id">int id of the teacher to be updated</param>
+        /// <returns>
+        /// View with update form
+        /// </returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var showTeacher = dataController.GetById(id);
+
+            var editTeacher = new AddTeacherModel();
+            editTeacher.Id = showTeacher.Teacher.Id;
+            editTeacher.FName = showTeacher.Teacher.Name.Split(' ')[0];
+            editTeacher.LName = showTeacher.Teacher.Name.Split(' ')[1];
+            editTeacher.EmpNo = showTeacher.Teacher.EmployeeNumber;
+            editTeacher.HireDate = showTeacher.Teacher.HireDate;
+            editTeacher.Salary = showTeacher.Teacher.Salary;
+
+            return View(editTeacher);
+        }
+
+        /// <summary>
         /// GET: /teachers/delete
         /// </summary>
         /// <param name="id">id of the teacher to delete</param>

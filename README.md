@@ -19,3 +19,8 @@
 - delete teacher using xhr
 - check for associated classes before deleting teacher
 - JS confirmation box
+
+# points covered in C3
+- update teacher using xhr request
+- using JSON object for xhr request
+- server side & client side validation

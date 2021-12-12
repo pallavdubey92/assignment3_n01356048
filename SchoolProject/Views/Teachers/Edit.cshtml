@@ -1,0 +1,36 @@
+﻿@model SchoolProject.Models.AddTeacherModel
+@{
+    ViewBag.Title = "Update Teacher";
+}
+@Scripts.Render("~/Scripts/Teacher/edit-teacher.js")
+
+<h2>Update Teacher</h2>
+
+<form id="editTeacherForm">
+    <div>
+        <label for="fName">First Name</label>
+        <input type="text" name="fName" id="fName" required minlength="3" placeholder="first name" value="@Model.FName" autofocus />
+        <span class="err-msg">First name is required. Minimum 3 characters.</span>
+    </div>
+    <div>
+        <label for="lName">Last Name</label>
+        <input type="text" name="lName" id="lName" required minlength="3" placeholder="last name" value="@Model.LName" />
+        <span class="err-msg">Last name is required. Minimum 3 characters.</span>
+    </div>
+    <div>
+        <label for="empNo">Employee No</label>
+        <input type="text" pattern="^T\d{3}" name="empNo" id="empNo" required placeholder="format: T123" value="@Model.EmpNo" />
+        <span class="err-msg">Emp no is required. Emp no match the format T123.</span>
+    </div>
+    <div>
+        <label for="hireDate">Hire date</label>
+        <input type="date" name="hireDate" id="hireDate" required value="@Model.HireDate.ToString("yyyy-MM-dd")" />
+        <span class="err-msg">Hire date is required. Hire date cannot be later than today</span>
+    </div>
+    <div>
+        <label for="salary">Salary</label>
+        <input type="number" name="salary" id="salary" required min="1" placeholder="salary" value="@Model.Salary" />
+        <span class="err-msg">Salary is required. Salary cannot be less than 0</span>
+    </div>
+    <button type="submit">Update</button>
+</form>

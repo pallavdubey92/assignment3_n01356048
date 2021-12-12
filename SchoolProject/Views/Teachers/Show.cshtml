@@ -8,6 +8,7 @@
 @Scripts.Render("~/Scripts/Teacher/show-teacher.js")
 
 <a id="deleteLink" href="/teachers/delete/@Model.Teacher.Id">Delete</a>
+<a id="deleteLink" href="/teachers/edit/@Model.Teacher.Id">Edit</a>
 
 <h2>@Model.Teacher.Name</h2>
 <p>Employee Number: @Model.Teacher.EmployeeNumber</p>

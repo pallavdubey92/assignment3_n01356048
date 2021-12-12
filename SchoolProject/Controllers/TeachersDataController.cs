@@ -313,5 +313,46 @@ namespace SchoolProject.Controllers
             conn.Close();
             return true;
         }
+
+        /// <summary>
+        /// update teacher
+        /// </summary>
+        /// <param name="id">id of the teacher to be updates</param>
+        /// <param name="updatedTeacher">new data for teacher</param>
+        [HttpPut]
+        [Route("{id:int}")]
+        public bool Update([FromUri] int id, [FromBody] AddTeacherModel updatedTeacher)
+        {
+            if (!updatedTeacher.Validate())
+                return false;
+
+            var sql = @"UPDATE school.teachers
+                        SET teacherfname=@fname,
+                            teacherlname=@lname,
+                            employeenumber=@empNo,
+                            hiredate=@hireDate,
+                            salary=@salary
+                        WHERE teacherid=@id";
+
+            var conn = dbContext.AccessDatabase();
+            conn.Open();
+
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = sql;
+            cmd.Prepare();
+
+            cmd.Parameters.AddWithValue("@fname", updatedTeacher.FName);
+            cmd.Parameters.AddWithValue("@lname", updatedTeacher.LName);
+            cmd.Parameters.AddWithValue("@empNo", updatedTeacher.EmpNo);
+            cmd.Parameters.AddWithValue("@hireDate", updatedTeacher.HireDate);
+            cmd.Parameters.AddWithValue("@salary", updatedTeacher.Salary);
+            cmd.Parameters.AddWithValue("@id", id);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+
+            return true;
+        }
     }
 }
